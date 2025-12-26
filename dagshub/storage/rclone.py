@@ -55,7 +55,7 @@ def check_and_provide_install_script(quiet=False):
                 for package, cmd in missing_packages:
                     log_message(f"Installing {package}...")
                     try:
-                        subprocess.run(cmd, shell=True, check=True)
+                        subprocess.run(cmd.split(), check=True)  # Fixed vulnerability by using shell=False
                         log_message(f"{package} installed successfully.")
                     except subprocess.CalledProcessError as e:
                         logger.error(f"Failed to install {package}: {e}")
